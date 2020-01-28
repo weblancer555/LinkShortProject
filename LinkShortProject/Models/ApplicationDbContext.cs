@@ -21,8 +21,6 @@ namespace LinkShortProject.Models
             modelBuilder.Entity<ShortLink>()
                 .HasIndex(b => b.ShortUrl)
                 .IsUnique();
-            modelBuilder.Entity<ShortLink>()
-                .HasIndex(b => b.IdentityUserId);
 
             base.OnModelCreating(modelBuilder);
         }

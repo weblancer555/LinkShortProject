@@ -153,6 +153,28 @@ namespace LinkShortProject.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ShortLinks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ShortUrl = table.Column<string>(nullable: true),
+                    FullUrl = table.Column<string>(nullable: true),
+                    IdentityUserId = table.Column<string>(maxLength: 450, nullable: true),
+                    CountTransitions = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShortLinks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShortLinks_AspNetUsers_IdentityUserId",
+                        column: x => x.IdentityUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -191,6 +213,18 @@ namespace LinkShortProject.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShortLinks_IdentityUserId",
+                table: "ShortLinks",
+                column: "IdentityUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShortLinks_ShortUrl",
+                table: "ShortLinks",
+                column: "ShortUrl",
+                unique: true,
+                filter: "[ShortUrl] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -209,6 +243,9 @@ namespace LinkShortProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "ShortLinks");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

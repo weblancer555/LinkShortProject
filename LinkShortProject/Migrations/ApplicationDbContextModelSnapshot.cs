@@ -30,7 +30,7 @@ namespace LinkShortProject.Migrations
                     b.Property<string>("FullUrl");
 
                     b.Property<string>("IdentityUserId")
-                        .HasMaxLength(256);
+                        .HasMaxLength(450);
 
                     b.Property<string>("ShortUrl");
 

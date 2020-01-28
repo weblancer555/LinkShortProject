@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LinkShortProject.Models;
+using LinkShortProject.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -45,6 +46,9 @@ namespace LinkShortProject
             services.AddIdentity<IdentityUser, IdentityRole>()
                .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddTransient<IShortLinkRepository, EFShortLinkRepository>();
+            services.AddTransient<ShortLinkService>();
+
             services.ConfigureApplicationCookie(opts => opts.LoginPath = "/login");
         }
 
@@ -70,6 +74,12 @@ namespace LinkShortProject
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                 name: "404",
+                 template: "404",
+                 defaults: new { controller = "Error", action = "Index" }
+               );
+
+                routes.MapRoute(
                  name: null,
                  template: "",
                  defaults: new { controller = "Cabinet", action = "Index" }
@@ -79,6 +89,12 @@ namespace LinkShortProject
                    name: null,
                    template: "cabinet",
                    defaults: new { controller = "Cabinet", action = "Index" }
+                 );
+
+                routes.MapRoute(
+                   name: null,
+                   template: "cabinet/{action}",
+                   defaults: new { controller = "Cabinet", action = "AddLink" }
                  );
 
                 routes.MapRoute(
@@ -94,8 +110,8 @@ namespace LinkShortProject
                 );
 
                 routes.MapRoute(
-                   name: null,
-                   template: "/{shortLink}",
+                   name: "short",
+                   template: "/{shortUrl}",
                    defaults: new { controller = "Link", action = "Index" }
                  );        
             });

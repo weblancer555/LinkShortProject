@@ -1,7 +1,48 @@
-﻿
+﻿@model List<ShortLink>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Кабинет";
 }
+
 @await Component.InvokeAsync("UserPanel")
-<h1>Cabinet</h1>
+
+    <div class="container">
+        <form class="input-group mb-3 mt-4" asp-action="AddLink" asp-controller="Cabinet" method="post">
+            <input type="text" name="url" class="form-control" placeholder="Добавить ссылку" aria-label="Добавить ссылку" >
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Сгенерировать короткую ссылку</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Короткая ссылка</th>
+                        <th scope="col">Полная ссылка</th>
+                        <th scope="col">Количество переходов</th>
+                        <th scope="col">Кнопка удаления</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var shortLink in Model)
+                    {
+                    <tr>
+                        <td><a href="@shortLink.ShortUrl">@shortLink.ShortUrl</a> </td>
+                        <td>@shortLink.FullUrl </td>
+                        <td>@shortLink.CountTransitions</td>
+                        <td>
+                            <form asp-action="DeleteLink" asp-controller="Cabinet" method="post">
+                                <input name="shortUrl" value="@shortLink.ShortUrl" hidden />
+                                <button type="submit" class="btn btn-danger">&#10006;</button>
+                            </form>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+    </div>
+
 

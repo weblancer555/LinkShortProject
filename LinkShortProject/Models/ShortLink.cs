@@ -13,7 +13,7 @@ namespace LinkShortProject.Models
         public string ShortUrl { get; set; }
         public string FullUrl { get; set; }
 
-        [MaxLength(256)]
+        [StringLength(450)]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
 
