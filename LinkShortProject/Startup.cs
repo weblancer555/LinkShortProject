@@ -88,6 +88,12 @@ namespace LinkShortProject
                 );
 
                 routes.MapRoute(
+                  name: null,
+                  template: "login/{action}",
+                  defaults: new { controller = "Login", action = "Index" }
+                );
+
+                routes.MapRoute(
                    name: null,
                    template: "/{shortLink}",
                    defaults: new { controller = "Link", action = "Index" }

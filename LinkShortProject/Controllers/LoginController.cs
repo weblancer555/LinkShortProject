@@ -47,12 +47,10 @@ namespace LinkShortProject.Controllers
             return View(loginModel);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await signInMng.SignOutAsync();
-            return Redirect("/login");
+            return Redirect("/");
         }
     }
 }
