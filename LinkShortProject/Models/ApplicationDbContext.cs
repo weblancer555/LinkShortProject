@@ -23,6 +23,8 @@ namespace LinkShortProject.Models
                 .IsUnique();
             modelBuilder.Entity<ShortLink>()
                 .HasIndex(b => b.IdentityUserId);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

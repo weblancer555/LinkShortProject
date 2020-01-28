@@ -39,7 +39,7 @@ namespace LinkShortProject
 
             services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(
-                   Configuration["ConnectionString"]
+                   Configuration["DB:LocalConnectionString"]
                ));
 
             services.AddIdentity<IdentityUser, IdentityRole>()
