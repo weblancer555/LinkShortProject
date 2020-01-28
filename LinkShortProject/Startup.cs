@@ -44,6 +44,8 @@ namespace LinkShortProject
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.ConfigureApplicationCookie(opts => opts.LoginPath = "/login");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,9 +69,25 @@ namespace LinkShortProject
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
+
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                   name: null,
+                   template: "cabinet",
+                   defaults: new { controller = "Cabinet", action = "Index" }
+                 );
+
+                routes.MapRoute(
+                  name: null,
+                  template: "login",
+                  defaults: new { controller = "Login", action = "Index" }
+                );
+
+                routes.MapRoute(
+                   name: null,
+                   template: "/{shortLink}",
+                   defaults: new { controller = "Link", action = "Index" }
+                 );        
             });
         }
     }
