@@ -10,8 +10,19 @@ namespace LinkShortProject.Models
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
+        public DbSet<ShortLink> ShortLinks { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ShortLink>()
+                .HasIndex(b => b.ShortUrl)
+                .IsUnique();
+            modelBuilder.Entity<ShortLink>()
+                .HasIndex(b => b.IdentityUserId);
         }
     }
 }
