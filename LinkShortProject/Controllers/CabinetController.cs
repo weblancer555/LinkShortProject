@@ -37,9 +37,9 @@ namespace LinkShortProject.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddLink(string url)
+        public async Task<ActionResult> AddLink(string fullUrl)
         {
-            shortLinkService.GenerateShortLink(url, await userMng.GetUserAsync(User));
+            shortLinkService.GenerateShortLink(fullUrl, await userMng.GetUserAsync(User));
             return RedirectToAction("Index");
         }
 

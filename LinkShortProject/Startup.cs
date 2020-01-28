@@ -87,15 +87,10 @@ namespace LinkShortProject
 
                 routes.MapRoute(
                    name: null,
-                   template: "cabinet",
+                   template: "cabinet/{action}",
                    defaults: new { controller = "Cabinet", action = "Index" }
                  );
 
-                routes.MapRoute(
-                   name: null,
-                   template: "cabinet/{action}",
-                   defaults: new { controller = "Cabinet", action = "AddLink" }
-                 );
 
                 routes.MapRoute(
                   name: null,
