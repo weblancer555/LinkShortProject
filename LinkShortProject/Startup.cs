@@ -89,6 +89,8 @@ namespace LinkShortProject
                    defaults: new { controller = "Link", action = "Index" }
                  );        
             });
+
+            SeedData.EnsurePopulated(app);
         }
     }
 }
