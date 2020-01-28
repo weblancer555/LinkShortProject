@@ -1,7 +1,30 @@
-﻿
+﻿@model LoginModel
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Login</h1>
+<div class="container mt-4">
+    <div class="d-flex justify-content-center h-100">
+        <form style="width:400px;" asp-action="Index" asp-controller="Login" method="post">
+            <div class="input-group form-group">
+                <input asp-for="Login" type="text" class="form-control" placeholder="Логин">
+            </div>
+            <div class="input-group form-group">
+                <input asp-for="Password" type="password" class="form-control" placeholder="Пароль">
+            </div>
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <div class="form-group d-flex justify-content-center">
+                <input type="submit" value="Войти" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+        <div>
+            <p>Логин - Administrator123_</p>
+            <p>Пароль - Qwerty123123_</p>
+        </div>
+    </div>
+
+</div>
 

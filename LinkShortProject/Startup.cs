@@ -69,7 +69,11 @@ namespace LinkShortProject
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
+                routes.MapRoute(
+                 name: null,
+                 template: "",
+                 defaults: new { controller = "Cabinet", action = "Index" }
+               );
 
                 routes.MapRoute(
                    name: null,

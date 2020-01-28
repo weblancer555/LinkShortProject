@@ -27,7 +27,7 @@ namespace LinkShortProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginModel loginModel)
+        public async Task<IActionResult> Index(LoginModel loginModel)
         {
             if(ModelState.IsValid)
             {
@@ -40,20 +40,16 @@ namespace LinkShortProject.Controllers
                     {
                         return RedirectToAction("Index", "Cabinet");
                     }
-                    else
-                    {
-                        ModelState.AddModelError("", "Некорректные логин и(или) пароль");
-                    }
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }
            
-            return Redirect("/login");
+            return View(loginModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OutLogin()
+        public async Task<IActionResult> Logout()
         {
             await signInMng.SignOutAsync();
             return Redirect("/login");

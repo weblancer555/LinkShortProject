@@ -20,15 +20,18 @@ namespace LinkShortProject.Models
             {
                 UserManager<IdentityUser> userManager = app.ApplicationServices.GetRequiredService<UserManager<IdentityUser>>();
 
-                string password = "Qwerty123123";
+                string password = "Qwerty123123_";
 
                 IdentityUser appUser = new IdentityUser()
                 {
-                    UserName = "Admin123"
+                    UserName = "Administrator123_",
+                    Email = "admin@admin.ru"
                 };
 
                 IdentityResult result = await userManager.CreateAsync(appUser, password);
             }
+
+            context.SaveChanges();
         }
     }
 }
